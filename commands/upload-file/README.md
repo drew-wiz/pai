@@ -6,7 +6,7 @@ The command will search for a customer folder within a "customers" folder in you
 
 ## Prerequisites
 
-Before running this command, you must create a virtual environment and install the required dependencies.
+Before running this command, you must create a virtual environment and install the required dependencies. If a `venv` directory already exists, you can skip these steps.
 
 1.  **Create a virtual environment:**
     ```bash
@@ -21,7 +21,10 @@ Before running this command, you must create a virtual environment and install t
 ## Usage
 
 ```bash
-commands/upload-file/venv/bin/python commands/upload-file/run.py --file-path <FILE_PATH> --target-folder <TARGET_FOLDER>
+commands/upload-file/venv/bin/python commands/upload-file/run.py --file-path <FILE_PATH> --target-folder <TARGET_FOLDER> [--gdoc] [--md]
 ```
 
 Replace `<FILE_PATH>` with the path to the file you want to upload and `<TARGET_FOLDER>` with the name of the folder to upload to.
+
+Use the `--gdoc` flag to convert the uploaded text file to a Google Doc.
+Use the `--md` flag to convert the uploaded Markdown file to a Google Doc.

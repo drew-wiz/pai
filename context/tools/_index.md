@@ -18,3 +18,13 @@ For any tool written in Python, the following conventions MUST be followed:
 3.  **Execution:** The script MUST be executed using the Python interpreter from its co-located `venv`. For example: `pai/commands/my-python-tool/venv/bin/python pai/commands/my-python-tool/run.py`.
 
 If you see a `requirements.txt` file for a Python script, always create a virtual environment to install the dependencies. Never try to install them globally.
+
+## Available Tools
+
+### `download-file`
+
+Downloads a file from Google Drive. See `commands/download-file/README.md` for more information.
+
+### `upload-file`
+
+Uploads a file to Google Drive. See `commands/upload-file/README.md` for more information.
