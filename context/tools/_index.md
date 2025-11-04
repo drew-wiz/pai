@@ -9,6 +9,9 @@ To use a tool, you must construct and execute the command as specified in its `R
 ## Editing Tools
 NEVER edit the code for any tools. If you run into a problem running the tool, immediately halt and ask me for input. The tools are meant to succeed as-is and if there is a problem, they need to be investigated by me. 
 
+## Writing Files
+If you need to create a file, use the `temp` directory to temporarily write the file.
+
 ## Python Tool Conventions
 
 For any tool written in Python, the following conventions MUST be followed:

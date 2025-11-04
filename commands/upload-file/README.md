@@ -1,8 +1,8 @@
 # Upload File Command
 
-This command uploads a file to a customer's folder in Google Drive.
+This command uploads a file to a specified folder in Google Drive.
 
-The command will search for a customer folder within a "customers" folder in your Google Drive. If it finds multiple folders matching the customer name, it will list them and exit. You can then re-run the command with the exact folder name.
+The command will search for the specified folder in your Google Drive. If it finds multiple folders matching the provided name, it will list them and exit. You can then re-run the command with the exact folder name.
 
 ## Prerequisites
 
