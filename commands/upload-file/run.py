@@ -10,7 +10,7 @@ from googleapiclient.http import MediaFileUpload
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 
-def main(file_path, target_folder, gdoc, md):
+def main(file_path, target_folder, absolute_directory_path, gdoc, md):
     creds = None
     creds_dir = os.path.expanduser("~/.pai_credentials/google")
     creds_path = os.path.join(creds_dir, "credentials.json")
@@ -33,25 +33,27 @@ def main(file_path, target_folder, gdoc, md):
         
         # Find the target folder
         parent_folder_id = 'root'
-        if target_folder:
-            path_parts = target_folder.split('/')
+        
+        folder_path = absolute_directory_path if absolute_directory_path else target_folder
+        search_operator = "=" if absolute_directory_path else "contains"
+
+        if folder_path:
+            path_parts = folder_path.split('/')
             for part in path_parts:
                 if parent_folder_id == 'root':
-                    query = f"mimeType='application/vnd.google-apps.folder' and name contains '{part}'"
+                    query = f"mimeType='application/vnd.google-apps.folder' and name {search_operator} '{part}'"
                 else:
-                    query = f"mimeType='application/vnd.google-apps.folder' and name contains '{part}' and '{parent_folder_id}' in parents"
+                    query = f"mimeType='application/vnd.google-apps.folder' and name {search_operator} '{part}' and '{parent_folder_id}' in parents"
                 results = drive_service.files().list(q=query, fields="files(id, name)").execute()
                 items = results.get("files", [])
                 if len(items) == 0:
-                    print(f"Could not find a folder with the name: {part} in path {target_folder}")
+                    print(f"Could not find a folder with the name: {part} in path {folder_path}")
                     return
                 elif len(items) > 1:
                     print(f"Found multiple folders with the name: {part}. Please choose one:")
                     for i, item in enumerate(items):
                         print(f"{i + 1}: {item.get('name')}")
-                    
-                    choice = int(input("Enter the number of the folder you want to use: ")) - 1
-                    parent_folder_id = items[choice].get("id")
+                    return
                 else:
                     parent_folder_id = items[0].get("id")
         customer_folder_id = parent_folder_id
@@ -88,8 +90,10 @@ def main(file_path, target_folder, gdoc, md):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Upload a file to a folder in Google Drive.")
     parser.add_argument("--file-path", type=str, required=True, help="The path to the file to upload.")
-    parser.add_argument("--target-folder", type=str, required=True, help="The name of the folder to upload to.")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--target-folder", type=str, help="The name of the folder to upload to (uses 'contains' search).")
+    group.add_argument("--absolute-directory-path", type=str, help="The absolute path of the folder to upload to (e.g. 'Folder A/Folder B', uses exact match).")
     parser.add_argument("--gdoc", action="store_true", help="Convert the uploaded text file to a Google Doc.")
     parser.add_argument("--md", action="store_true", help="Convert the uploaded Markdown file to a Google Doc.")
     args = parser.parse_args()
-    main(args.file_path, args.target_folder, args.gdoc, args.md)
+    main(args.file_path, getattr(args, 'target_folder', None), getattr(args, 'absolute_directory_path', None), args.gdoc, args.md)

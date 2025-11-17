@@ -21,10 +21,14 @@ Before running this command, you must create a virtual environment and install t
 ## Usage
 
 ```bash
-commands/upload-file/venv/bin/python commands/upload-file/run.py --file-path <FILE_PATH> --target-folder <TARGET_FOLDER> [--gdoc] [--md]
+commands/upload-file/venv/bin/python commands/upload-file/run.py --file-path <FILE_PATH> (--target-folder <TARGET_FOLDER> | --absolute-directory-path <ABSOLUTE_DIRECTORY_PATH>) [--gdoc] [--md]
 ```
 
-Replace `<FILE_PATH>` with the path to the file you want to upload and `<TARGET_FOLDER>` with the name of the folder to upload to.
+Replace `<FILE_PATH>` with the path to the file you want to upload.
+
+You must specify one of the following options for the destination folder:
+-   `--target-folder <TARGET_FOLDER>`: The name of the folder to upload to. This performs a "contains" search, so partial names are allowed.
+-   `--absolute-directory-path <ABSOLUTE_DIRECTORY_PATH>`: The absolute path of the folder to upload to (e.g., 'Folder A/Folder B'). This performs an exact match search.
 
 Use the `--gdoc` flag to convert the uploaded text file to a Google Doc.
 Use the `--md` flag to convert the uploaded Markdown file to a Google Doc.
