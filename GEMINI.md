@@ -37,3 +37,23 @@ You cannot properly respond to ANY request without ACTUALLY READING:
 - Available agents (from ~/pai/agents/ directory)
 
 **THIS IS NOT OPTIONAL. ACTUALLY DO THE READS BEFORE THE CHECKMARKS.**
+
+## File Existence Mandate
+
+Before executing any command that reads, modifies, or uploads a file, you MUST first verify that the file exists on the filesystem. The only exception is if you created the file using the write_file tool in the immediately preceding step. Use the list_directory tool to confirm the file's existence if there is any
+  uncertainty.
+
+## Tool Usage Protocol
+
+When using any tool, especially those in the commands/ directory, you MUST follow this sequence without deviation:
+
+ 1. Read the README: Before the first use of a tool in a session, you MUST read its corresponding README.md file to understand its purpose, prerequisites, and exact usage syntax.
+ 2. Verify Prerequisites: Before execution, you MUST confirm that all prerequisites from the README.md have been met. This includes, but is not limited to:
+     * Ensuring the necessary virtual environment (venv) exists and is used for execution.
+     * Installing all required dependencies from a requirements.txt file.
+     * Confirming that any required input files exist.
+ 3. Execute Exactly: You MUST construct and execute the command precisely as shown in the Usage section of the documentation, using the specified virtual environment's interpreter.
+
+## File Writing Mandate
+
+When you write any files, write them to the `./temp` directory in the cwd. NEVER write files outside the `./temp` directory unless given explicit permision to do so.
