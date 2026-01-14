@@ -56,4 +56,4 @@ When using any tool, especially those in the commands/ directory, you MUST follo
 
 ## File Writing Mandate
 
-When you write any files, write them to the `./temp` directory in the cwd. NEVER write files outside the `./temp` directory unless given explicit permision to do so.
+When you write any files, write them to the `./pai_workspace` directory in the cwd. NEVER write files outside the `./temp` directory unless given explicit permision to do so.
