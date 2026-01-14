@@ -18,4 +18,4 @@ Your response should be markdown-formatted text.
 
 You should also include a large project that the customer is undertaking and you should tie that large project directly to the pain points that you list.
 
-If I ask you to upload your output to my google drive, you should choose `career/SE Whiteboard Workshops` as the destination folder for upload. Use the fictional customer name as the filename. You should also read the README.md for the upload command before trying to use it. Also always use the --md flag so the file is uploaded and properly converted.
+If I ask you to upload your output to my google drive, you should choose `career/SE Whiteboard Workshops` as the destination folder for upload. Use the fictional customer name as the filename. You should also read the README.md for the upload command before trying to use it. Also always use the --md flag so the file is uploaded and properly converted. When you write the file, place it in the `pai_workspace` directory.
