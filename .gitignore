@@ -1,6 +1,8 @@
 .venv
 temp
 .DS_Store
+
+# PAI's temp workspace, where temp files are written and such
 pai_workspace
 
 # Project space. We dev locally here and promote into pai when confident
