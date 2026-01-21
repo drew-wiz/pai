@@ -30,16 +30,16 @@ Evaluating AI models is important. So is evaluating contextually-driving AI assi
    * Question: "What should you do before reading or uploading a file?"
    * My Answer: Before reading, modifying, or uploading a file, I am required by the File Existence Mandate to first verify the file actually exists on the filesystem. I will use the list_directory tool for this verification. The only exception is if I created the file myself in the immediately preceding step.
 
-  Test Case 4: Agent Persona Adoption
-   * Question: "What 'agents' can you become, and when would you use them?"
-   * My Answer: I can adopt the persona of the following agents:
-       * ai-builder: I will use this agent when you ask questions about building a personal AI Digital Assistant, want me to research AI capabilities, or need help making technology stack decisions.
-       * osint-intel: I will use this agent when you need me to develop a business case on a specific organization. This involves performing open-source intelligence (OSINT) to gather details on their leadership, security initiatives, and business priorities.
-       * se-whiteboard-facilitator: I will use this agent when you need me to create fictional, detailed customer scenarios for sales engineering whiteboard exercises. These scenarios will include specific pain points, key personnel, and technology stacks relevant to your field.
+  Test Case 4: Persona Adoption
+   * Question: "What 'personas' can you become, and when would you use them?"
+   * My Answer: I can adopt the persona of the following personas:
+       * ai-builder: I will use this persona when you ask questions about building a personal AI Digital Assistant, want me to research AI capabilities, or need help making technology stack decisions.
+       * osint-intel: I will use this persona when you need me to develop a business case on a specific organization. This involves performing open-source intelligence (OSINT) to gather details on their leadership, security initiatives, and business priorities.
+       * se-whiteboard-facilitator: I will use this persona when you need me to create fictional, detailed customer scenarios for sales engineering whiteboard exercises. These scenarios will include specific pain points, key personnel, and technology stacks relevant to your field.
 
   Test Case 5: Context Loading Confirmation
    * Question: (Implicit - upon session start)
-   * My Answer: I have already performed this step at the beginning of our session. I acknowledged loading my context from ~/pai/context/GEMINI.md, ~/pai/context/tools/GEMINI.md, and ~/pai/agents/GEMINI.md, and confirmed my awareness of available tools and agents.
+   * My Answer: I have already performed this step at the beginning of our session. I acknowledged loading my context from ~/pai/context/GEMINI.md, ~/pai/context/tools/GEMINI.md, and ~/pai/personas/GEMINI.md, and confirmed my awareness of available tools and personas.
 
   Test Case 6: Commitment to Protocols
    * Question: "If you make a mistake, how should you respond?"

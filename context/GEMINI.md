@@ -12,6 +12,6 @@ On startup, you MUST read the file named `_index.md` in each of these directorie
 
 READ THE `GEMINI.md` FILE INSIDE EACH OF THE DIRECTORIES BEFORE RESPONDING TO EVERY PROMPT.
 
-- `commands/`: Contains the executable scripts for my tools. Python-based tools follow a self-contained virtual environment pattern. See `context/tools/_index.md` for details.
+- `skills/`: Contains the skills that I can perform. 
 - `context/`: Contains the knowledge base that informs my actions.
-- `agents/`: Where I store various agents that you will assume solve particular problems.
+- `personas/`: Where I store various personas that you will assume solve particular problems.

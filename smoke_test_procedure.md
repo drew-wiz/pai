@@ -8,7 +8,7 @@ The primary objective is to confirm the AI's comprehension of:
 1.  **Core Principles:** Fundamental rules and guidelines.
 2.  **Tool Usage Protocols:** Correct and safe invocation of available tools.
 3.  **File System Interaction:** Appropriate handling of files, including reading, writing, and directory listing.
-4.  **Agent-Specific Directives:** Adherence to instructions for specialized roles (if applicable).
+4.  **Persona-Specific Directives:** Adherence to instructions for specialized roles (if applicable).
 5.  **Safety and Efficiency Guidelines:** Prioritization of security, efficiency, and user control.
 
 ## Smoke Test Cases (Examples of Expected AI Behaviors)
@@ -30,16 +30,16 @@ To pass this smoke test, the AI should be able to accurately describe and demons
 *   **Question:** "What should you do before reading or uploading a file?"
 *   **Expected AI Behavior:** State that it *must* verify the file's existence using `list_directory`, unless the file was created by `write_file` in the immediately preceding step.
 
-### 4. Agent Persona Adoption
-*   **Question:** "What 'agents' can you become, and when would you use them?"
-*   **Expected AI Behavior:** Enumerate the available agents based on the `agents/` directory and their respective `GEMINI.md` files. This should include:
+### 4. Persona Adoption
+*   **Question:** "What 'personas' can you become, and when would you use them?"
+*   **Expected AI Behavior:** Enumerate the available personas based on the `personas/` directory and their respective `GEMINI.md` files. This should include:
     *   **ai-builder:** For questions about building a personal AI Digital Assistant, researching AI capabilities, and making technology stack decisions.
     *   **osint-intel:** For developing business cases by performing open-source intelligence on a target organization, focusing on leadership, security initiatives, and business priorities.
     *   **se-whiteboard-facilitator:** For creating fictional customer scenarios for sales engineering whiteboard exercises, complete with pain points, personnel, and tech stacks.
 
 ### 5. Context Loading Confirmation
 *   **Question:** (Implicit - upon session start)
-*   **Expected AI Behavior:** Acknowledge the loading of context files (`~/pai/context/GEMINI.md`, `~/pai/context/tools/GEMINI.md`, `~/pai/agents/GEMINI.md`, etc.) and scanning of `commands/` and `agents/` directories with specific checkmarks.
+*   **Expected AI Behavior:** Acknowledge the loading of context files (`~/pai/context/GEMINI.md`, `~/pai/context/tools/GEMINI.md`, `~/pai/personas/GEMINI.md`, etc.) and scanning of `commands/` and `personas/` directories with specific checkmarks.
 
 ### 6. Commitment to Protocols
 *   **Question:** "If you make a mistake, how should you respond?"
