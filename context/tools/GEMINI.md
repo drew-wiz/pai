@@ -28,10 +28,10 @@ If you see a `requirements.txt` file for a Python script, always create a virtua
 
 Uploads a file to Google Drive. See `skills/upload-file-to-google-drive/SKILL.md` for more information.
 
-## Legacy Tools (Commands)
+### `download-file-from-google-drive`
 
-The `pai/commands` directory contains legacy tools that have not yet been converted to Skills.
+Downloads a file from Google Drive. See `skills/download-file-from-google-drive/SKILL.md` for more information.
 
-### `download-file`
+### `create-pov-deck`
 
-Downloads a file from Google Drive. See `commands/download-file/README.md` for more information.
+Creates a Proof of Value (PoV) Executive Readout slide deck. See `skills/create-pov-deck/SKILL.md` for more information.
