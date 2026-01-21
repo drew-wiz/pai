@@ -1,3 +1,7 @@
 .venv
 temp
 .DS_Store
+pai_workspace
+
+# Project space. We dev locally here and promote into pai when confident
+human_workspace
