@@ -19,9 +19,9 @@ def main(customer_name, ae_name, region, notes_file):
   creds = None
   creds_dir = os.path.expanduser("~/.pai_credentials/google")
   creds_path = os.path.join(creds_dir, "credentials.json")
-  token_path = os.path.join(creds_dir, "token.json")
+  token_path = os.path.join(creds_dir, "token_slides.json")
 
-  # The file token.json stores the user's access and refresh tokens, and is
+  # The file token_slides.json stores the user's access and refresh tokens, and is
   # created automatically when the authorization flow completes for the first
   # time.
   if os.path.exists(token_path):

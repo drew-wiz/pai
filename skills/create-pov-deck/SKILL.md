@@ -16,15 +16,15 @@ The `scripts/run.py` script:
 ## Usage
 
 ### 1. Prerequisites
-Ensure the virtual environment is set up and dependencies are installed.
-- **Check/Create Venv:** `pai/skills/create-pov-deck/scripts/venv`
-- **Install Requirements:** `pai/skills/create-pov-deck/scripts/requirements.txt`
+- **Install `uv`:** This skill uses `uv` for fast, unified Python package management.
+  - MacOS/Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  - Homebrew: `brew install uv`
 
 ### 2. Execution
-Run the script using the python interpreter in the virtual environment.
+Run the script using `uv run`. This will automatically handle virtual environment creation and dependency installation.
 
 ```bash
-skills/create-pov-deck/scripts/venv/bin/python skills/create-pov-deck/scripts/run.py --customer-name <CUSTOMER> --ae-name <AE> --region <REGION> --notes-file <PATH_TO_NOTES>
+uv run --with-requirements skills/create-pov-deck/scripts/requirements.txt skills/create-pov-deck/scripts/run.py --customer-name <CUSTOMER> --ae-name <AE> --region <REGION> --notes-file <PATH_TO_NOTES>
 ```
 
 **Required Arguments:**
@@ -35,7 +35,7 @@ skills/create-pov-deck/scripts/venv/bin/python skills/create-pov-deck/scripts/ru
 
 ### Example
 ```bash
-skills/create-pov-deck/scripts/venv/bin/python skills/create-pov-deck/scripts/run.py --customer-name "Acme Corp" --ae-name "Jane Doe" --region "US Public Sector" --notes-file "notes.txt"
+uv run --with-requirements skills/create-pov-deck/scripts/requirements.txt skills/create-pov-deck/scripts/run.py --customer-name "Acme Corp" --ae-name "Jane Doe" --region "US Public Sector" --notes-file "notes.txt"
 ```
 
 ### 3. Gathering the notes file
