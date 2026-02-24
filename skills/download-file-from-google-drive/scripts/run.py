@@ -32,28 +32,43 @@ def main(file_name, parent_folder):
         drive_service = build("drive", "v3", credentials=creds)
         
         parent_folder_id = 'root'
+        search_global = False
+
         if parent_folder:
             path_parts = parent_folder.split('/')
             for part in path_parts:
                 query = f"mimeType='application/vnd.google-apps.folder' and name contains '{part}' and '{parent_folder_id}' in parents"
                 results = drive_service.files().list(q=query, fields="files(id, name)").execute()
                 items = results.get("files", [])
+                
                 if len(items) == 0:
-                    print(f"Could not find a folder with the name: {part} in path {parent_folder}")
-                    return
+                    print(f"Warning: Could not find folder '{part}' in path '{parent_folder}'. Falling back to global search.")
+                    search_global = True
+                    break
                 elif len(items) > 1:
-                    print(f"Found multiple folders with the name: {part}. Please choose one:")
+                    print(f"Found multiple folders matching '{part}'. Please choose one:")
                     for i, item in enumerate(items):
                         print(f"{i + 1}: {item.get('name')}")
                     
-                    choice = int(input("Enter the number of the folder you want to use: ")) - 1
-                    parent_folder_id = items[choice].get("id")
+                    while True:
+                        try:
+                            choice = int(input("Enter the number of the folder you want to use: ")) - 1
+                            if 0 <= choice < len(items):
+                                parent_folder_id = items[choice].get("id")
+                                break
+                            else:
+                                print("Invalid choice. Please try again.")
+                        except ValueError:
+                             print("Invalid input. Please enter a number.")
                 else:
                     parent_folder_id = items[0].get("id")
 
         query = f"name contains '{file_name}'"
-        if parent_folder_id:
-            query += f" and '{parent_folder_id}' in parents"
+        if not search_global and parent_folder_id != 'root':
+             query += f" and '{parent_folder_id}' in parents"
+        
+        # Exclude trashed files
+        query += " and trashed = false"
 
         results = drive_service.files().list(q=query, fields="files(id, name, mimeType)").execute()
         items = results.get("files", [])
@@ -62,24 +77,40 @@ def main(file_name, parent_folder):
             print(f"Could not find a file with the name: {file_name}")
             return
         elif len(items) > 1:
-            print("Found multiple files. Please be more specific.")
-            for item in items:
-                print(item.get('name'))
-            return
+            print(f"Found multiple files matching '{file_name}'. Please choose one:")
+            for i, item in enumerate(items):
+                print(f"{i + 1}: {item.get('name')}")
+            
+            while True:
+                try:
+                    choice = int(input("Enter the number of the file you want to download: ")) - 1
+                    if 0 <= choice < len(items):
+                        file_id = items[choice].get("id")
+                        file_mime_type = items[choice].get("mimeType")
+                        final_file_name = items[choice].get("name") # Use actual name
+                        break
+                    else:
+                         print("Invalid choice. Please try again.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
         else:
             file_id = items[0].get("id")
             file_mime_type = items[0].get("mimeType")
+            final_file_name = items[0].get("name")
 
         if "google-apps" in file_mime_type:
+            # Export Google Docs as plain text
             request = drive_service.files().export_media(fileId=file_id, mimeType='text/plain')
+            final_file_name += ".txt" # Append extension for text export
         else:
             request = drive_service.files().get_media(fileId=file_id)
         
-        temp_dir = os.path.join(os.getcwd(), "temp")
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
+        # Save to pai_workspace
+        workspace_dir = os.path.join(os.getcwd(), "pai_workspace")
+        if not os.path.exists(workspace_dir):
+            os.makedirs(workspace_dir)
             
-        file_path = os.path.join(temp_dir, file_name)
+        file_path = os.path.join(workspace_dir, final_file_name)
         
         fh = io.FileIO(file_path, "wb")
         downloader = MediaIoBaseDownload(fh, request)

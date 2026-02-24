@@ -57,3 +57,7 @@ When using any tool, especially those in the commands/ directory, you MUST follo
 ## File Writing Mandate
 
 When you write any files, write them to the `./pai_workspace` directory in the cwd. NEVER write files outside the `./temp` directory unless given explicit permision to do so.
+
+## Opertaional Mandates
+
+When you run any command, it should always be a command that will complete and not hang, waiting for inputs. Examples of 'bad' commands are simply SSH'ing into a machine without a predefined command, because that will just sit at a bash prompt forever. Other 'bad' commands are SSH commands that could prompt you to confirm the authenticity of the remote server. Because we are likely creating/destroying VMs regularly, you will want to pass any flags to `ssh` (and other) commands that reduce the chance of you sitting at a prompt forever.

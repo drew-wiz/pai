@@ -1,7 +1,7 @@
 import os.path
 import datetime
 import argparse
-import google.generativeai as genai
+from google import genai
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -85,8 +85,8 @@ def main(customer_name, ae_name, region, notes_file):
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         raise ValueError("GOOGLE_API_KEY environment variable not set.")
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('models/gemini-pro-latest')
+    
+    client = genai.Client(api_key=api_key)
 
     with open(notes_file, "r") as f:
         notes = f.read()
@@ -107,7 +107,10 @@ def main(customer_name, ae_name, region, notes_file):
     }}
     """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model='gemini-flash-latest',
+        contents=prompt
+    )
     import json
     
     # Clean the response to extract only the JSON

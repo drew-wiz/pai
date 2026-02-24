@@ -37,3 +37,6 @@ skills/create-pov-deck/scripts/venv/bin/python skills/create-pov-deck/scripts/ru
 ```bash
 skills/create-pov-deck/scripts/venv/bin/python skills/create-pov-deck/scripts/run.py --customer-name "Acme Corp" --ae-name "Jane Doe" --region "US Public Sector" --notes-file "notes.txt"
 ```
+
+### 3. Gathering the notes file
+You will need to find the 'notes' file. Generally speaking this is in my Google Drive in 'customers/$(CUSTOMER_NAME)/$(CUSTOMER_NAME)-notes'. You will need to search in my drive to find it as the naming convention is not always 100% predictable. However, you will always find the file as a Google Doc in that location.
