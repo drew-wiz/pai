@@ -19,15 +19,15 @@ The `scripts/run.py` script handles the download process. It supports:
 ## Usage
 
 ### 1. Prerequisites
-Ensure the virtual environment is set up and dependencies are installed.
-- **Check/Create Venv:** `pai/skills/download-file-from-google-drive/scripts/venv`
-- **Install Requirements:** `pai/skills/download-file-from-google-drive/scripts/requirements.txt`
+- **Install `uv`:** This skill uses `uv` for fast, unified Python package management.
+  - MacOS/Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  - Homebrew: `brew install uv`
 
 ### 2. Execution
-Run the script using the python interpreter in the virtual environment.
+Run the script using `uv run`. This will automatically handle virtual environment creation and dependency installation.
 
 ```bash
-skills/download-file-from-google-drive/scripts/venv/bin/python skills/download-file-from-google-drive/scripts/run.py --file-name <FILE_NAME> [OPTIONS]
+uv run --with-requirements skills/download-file-from-google-drive/scripts/requirements.txt skills/download-file-from-google-drive/scripts/run.py --file-name <FILE_NAME> [OPTIONS]
 ```
 
 **Required Arguments:**
@@ -35,15 +35,21 @@ skills/download-file-from-google-drive/scripts/venv/bin/python skills/download-f
 
 **Optional Arguments:**
 - `--parent-folder <FOLDER_NAME>`: The name (or partial name) of the parent folder to search within.
+- `--file-id <ID>`: The specific ID of the file to download (bypasses search).
 
 ### Examples
 
 **Exact or partial search:**
 ```bash
-skills/download-file-from-google-drive/scripts/venv/bin/python skills/download-file-from-google-drive/scripts/run.py --file-name "notes" --parent-folder "Harvard Medical School"
+uv run --with-requirements skills/download-file-from-google-drive/scripts/requirements.txt skills/download-file-from-google-drive/scripts/run.py --file-name "notes" --parent-folder "Harvard Medical School"
 ```
 
 **Global search (if folder path is unknown):**
 ```bash
-skills/download-file-from-google-drive/scripts/venv/bin/python skills/download-file-from-google-drive/scripts/run.py --file-name "harvard medical school notes"
+uv run --with-requirements skills/download-file-from-google-drive/scripts/requirements.txt skills/download-file-from-google-drive/scripts/run.py --file-name "harvard medical school notes"
+```
+
+**Download by ID:**
+```bash
+uv run --with-requirements skills/download-file-from-google-drive/scripts/requirements.txt skills/download-file-from-google-drive/scripts/run.py --file-id "1jAs8WnaqvW8x4WEqcZgVxPqL3kPZdwdw7gV-iR1-2F0"
 ```
