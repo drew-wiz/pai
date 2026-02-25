@@ -17,15 +17,15 @@ The `scripts/run.py` script handles the upload process. It supports:
 ## Usage
 
 ### 1. Prerequisites
-Ensure the virtual environment is set up and dependencies are installed.
-- **Check/Create Venv:** `pai/skills/upload-file-to-google-drive/scripts/venv`
-- **Install Requirements:** `pai/skills/upload-file-to-google-drive/scripts/requirements.txt`
+- **Install `uv`:** This skill uses `uv` for fast, unified Python package management.
+  - MacOS/Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+  - Homebrew: `brew install uv`
 
 ### 2. Execution
-Run the script using the python interpreter in the virtual environment.
+Run the script using `uv run`. This will automatically handle virtual environment creation and dependency installation.
 
 ```bash
-skills/upload-file-to-google-drive/scripts/venv/bin/python skills/upload-file-to-google-drive/scripts/run.py --file-path <FILE_PATH> [OPTIONS]
+uv run --with-requirements skills/upload-file-to-google-drive/scripts/requirements.txt skills/upload-file-to-google-drive/scripts/run.py --file-path <FILE_PATH> [OPTIONS]
 ```
 
 **Required Arguments:**
@@ -41,5 +41,5 @@ skills/upload-file-to-google-drive/scripts/venv/bin/python skills/upload-file-to
 ### Example
 To upload `report.md` to the 'Project X' folder and convert it to a Google Doc:
 ```bash
-skills/upload-file-to-google-drive/scripts/venv/bin/python skills/upload-file-to-google-drive/scripts/run.py --file-path report.md --target-folder "Project X" --md
+uv run --with-requirements skills/upload-file-to-google-drive/scripts/requirements.txt skills/upload-file-to-google-drive/scripts/run.py --file-path report.md --target-folder "Project X" --md
 ```
