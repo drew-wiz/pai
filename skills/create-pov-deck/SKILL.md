@@ -40,3 +40,15 @@ uv run --with-requirements skills/create-pov-deck/scripts/requirements.txt skill
 
 ### 3. Gathering the notes file
 You will need to find the 'notes' file. Generally speaking this is in my Google Drive in 'customers/$(CUSTOMER_NAME)/$(CUSTOMER_NAME)-notes'. You will need to search in my drive to find it as the naming convention is not always 100% predictable. However, you will always find the file as a Google Doc in that location.
+
+## Information Gathering and Accuracy
+When preparing the input for this skill, follow these priority rules:
+1. **User Prompt:** Prioritize any specific concerns or details provided by the user in their request.
+2. **Customer Notes:** Use the customer notes to fill in any blanks or provide context not present in the user prompt.
+3. **No Speculation:** NEVER speculate or guess. If neither the prompt nor the notes provide a complete picture of the priorities, challenges, or impacts, YOU MUST ask the user for clarification and more details before proceeding.
+
+## Output
+Upon successful execution, the script will output a summary block. You MUST extract this information and present it clearly to the user, including:
+- **Presentation Link:** `https://docs.google.com/presentation/d/<PRESENTATION_ID>/edit`
+- **Folder Location:** `templates/ai-workspace` (Folder ID: `1pWnLJ6FlLmpgaYmMjnHpQEru1su7OTO9`)
+- **Customer Name & AE**
