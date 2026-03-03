@@ -49,17 +49,18 @@ def generate_content_from_notes(notes, api_key, additional_instructions=None):
     {user_guidance}
 
     You need to identify:
-    1. A concise summary of the engagement (timeline, key events) for the 'Our engagement to date' slide.
-    2. The Top 3 Business Priorities/Themes identified during the PoV.
-    3. For EACH Priority, identify:
+    1. A concise summary of the cloud connection (e.g. 'Connected to AWS - 15 mins') for the '{{pov_started_details}}' placeholder.
+    2. Exactly 4 Use Case topics covered during the PoV for the timeline (e.g. 'IAM Governance', 'Vulnerability Assessment'). These map to '{{use_case_01}}' through '{{use_case_04}}'.
+    3. The Top 3 Business Priorities/Themes identified during the PoV for deep-dive slides.
+    4. For EACH Priority, identify:
        - 3 specific findings, wins, or goals achieved ('findings').
        - A list of challenges/pain points ('challenges').
        - A list of downstream mission impacts ('impacts').
-    4. A list of 3-5 concrete Next Steps.
 
     Output MUST be valid JSON with this exact structure:
     {{
-      "engagement_summary": "Concise summary text...",
+      "pov_started_details": "Concise connection summary...",
+      "timeline_use_cases": ["Use Case 1", "Use Case 2", "Use Case 3", "Use Case 4"],
       "priorities": [
         {{
           "title": "Priority 1 Title",
@@ -79,9 +80,7 @@ def generate_content_from_notes(notes, api_key, additional_instructions=None):
           "challenges": ["Challenge 1", "Challenge 2", "Challenge 3"],
           "impacts": ["Impact 1", "Impact 2", "Impact 3"]
         }}
-      ],
-      "next_steps": ["Step 1", "Step 2", "Step 3"],
-      "timeline_use_cases": ["Use Case 1", "Use Case 2", "Use Case 3", "Use Case 4"]
+      ]
     }}
     """
 
@@ -162,7 +161,7 @@ def main(customer_name, ae_name, region, notes_file, additional_instructions):
         requests.append(create_replacement_request("<REGION>", region))
 
         # Slide 3: Timeline Replacements
-        requests.append(create_replacement_request("{{pov_started_details}}", content.get("engagement_summary", "")))
+        requests.append(create_replacement_request("{{pov_started_details}}", content.get("pov_started_details", "")))
         
         timeline_use_cases = content.get("timeline_use_cases", [])
         for i in range(4):
@@ -223,13 +222,6 @@ def main(customer_name, ae_name, region, notes_file, additional_instructions):
                 for i in range(3):
                     finding_text = f"• {findings[i]}" if i < len(findings) else ""
                     requests.append(create_replacement_request(f"Goal {i+1}", finding_text, [p_goals_id]))
-
-        # Next Steps (Slide 20)
-        if len(slides) > 19:
-            steps = content.get("next_steps", [])
-            if steps:
-                next_steps_text = "Next Steps\n" + "\n".join([f"• {step}" for step in steps])
-                requests.append(create_replacement_request("Next Steps", next_steps_text, [slides[19].get('objectId')]))
 
         # Execute Batch Update
         requests = [r for r in requests if r is not None]

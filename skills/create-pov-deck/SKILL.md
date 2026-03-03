@@ -24,7 +24,7 @@ The `scripts/run.py` script:
 Run the script using `uv run`. This will automatically handle virtual environment creation and dependency installation.
 
 ```bash
-uv run --with-requirements skills/create-pov-deck/scripts/requirements.txt skills/create-pov-deck/scripts/run.py --customer-name <CUSTOMER> --ae-name <AE> --region <REGION> --notes-file <PATH_TO_NOTES>
+uv run --with-requirements skills/create-pov-deck/scripts/requirements.txt skills/create-pov-deck/scripts/run.py --customer-name <CUSTOMER> --ae-name <AE> --region <REGION> --notes-file <PATH_TO_NOTES> [--additional-instructions <INSTRUCTIONS>]
 ```
 
 **Required Arguments:**
@@ -32,6 +32,9 @@ uv run --with-requirements skills/create-pov-deck/scripts/requirements.txt skill
 - `--ae-name "Name"`: Name of the Account Executive.
 - `--region "Region"`: Region (e.g., "US East").
 - `--notes-file "path/to/notes.txt"`: Path to the text file containing use case notes.
+
+**Optional but Critical Arguments:**
+- `--additional-instructions "Instructions"`: Specific user instructions, priorities, or concerns. **MANDATORY** to use this when the user provides specific goals in their prompt to ensure they take precedence over notes.
 
 ### Example
 ```bash
@@ -43,7 +46,7 @@ You will need to find the 'notes' file. Generally speaking this is in my Google 
 
 ## Information Gathering and Accuracy
 When preparing the input for this skill, follow these priority rules:
-1. **User Prompt:** Prioritize any specific concerns or details provided by the user in their request.
+1. **User Prompt:** Prioritize any specific concerns or details provided by the user in their request. **You MUST pass these concerns to the script using the `--additional-instructions` flag.**
 2. **Customer Notes:** Use the customer notes to fill in any blanks or provide context not present in the user prompt.
 3. **No Speculation:** NEVER speculate or guess. If neither the prompt nor the notes provide a complete picture of the priorities, challenges, or impacts, YOU MUST ask the user for clarification and more details before proceeding.
 

@@ -20,13 +20,15 @@ For any skill written in Python, the implementation usually resides in a `script
 2.  **Dependencies:** All dependencies MUST be listed in a `requirements.txt` file within the `scripts/` directory.
 3.  **Execution:** The script MUST be executed using the Python interpreter from its co-located `venv`. For example: `pai/skills/my-skill/scripts/venv/bin/python3 pai/skills/my-skill/scripts/run.py`. Unless otherwise stated, always use `python3` and never use `python`.
 
-If you see a `requirements.txt` file for a Python script, always create a virtual environment to install the dependencies. Never try to install them globally.
+If you see a `requirements.txt` file for a Python script, always create a virtual environment and install the dependencies using `uv pip install -r requirements.txt`. Never try to install them globally.
 
 ## Available Skills
 
 ### `upload-file-to-google-drive`
 
 Uploads a file to Google Drive. See `skills/upload-file-to-google-drive/SKILL.md` for more information.
+
+**Post-Upload Requirement:** After successfully using the `upload-file-to-google-drive` skill, you MUST report the full Google Drive path and file ID of the uploaded file to the user.
 
 ### `download-file-from-google-drive`
 
@@ -35,3 +37,4 @@ Downloads a file from Google Drive. See `skills/download-file-from-google-drive/
 ### `create-pov-deck`
 
 Creates a Proof of Value (PoV) Executive Readout slide deck. See `skills/create-pov-deck/SKILL.md` for more information.
+
